@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Penyedia;
+use App\Models\PPN;
 use App\Models\PPh21;
 use App\Models\PPh22;
 use App\Models\PPh23;
-use App\Models\PPN;
+use App\Models\Penyedia;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class homeController extends Controller
 {
@@ -35,5 +36,12 @@ class homeController extends Controller
     {
         $data = PPh23::get();
         return view('pajak', ['data' => $data]);
+    }
+    public function pdfStream()
+    {
+
+        $data = PPh23::get();
+        $pdf = Pdf::loadView('pajak', ['data' => $data]);
+        return $pdf->stream();
     }
 }
