@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class PPN extends Model
 {
-    protected $table = 'ppn';
     protected $primaryKey = 'kwitansi';
+    protected $table = 'ppn';
 }
