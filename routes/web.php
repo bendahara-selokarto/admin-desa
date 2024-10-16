@@ -1,7 +1,8 @@
 <?php
 
+use App\Models\Penyedia;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Vendor;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\homeController;
 
-Route::get('/', [Vendor::class, 'index']);
+Route::get('/', [homeController::class, 'index']);

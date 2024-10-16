@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penyedia;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class Vendor extends Controller
+class homeController extends Controller
 {
     public function index()
     {
-        $data = DB::table('vendor')->all();
-
+        $data = Penyedia::select('rekening')->get();
         return view('vendor', ['data' => $data]);
     }
 }
