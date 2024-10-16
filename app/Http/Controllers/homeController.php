@@ -9,6 +9,7 @@ use App\Models\PPh23;
 use App\Models\Penyedia;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Riskihajar\Terbilang\Facades\Terbilang;
 
 class homeController extends Controller
 {
@@ -39,9 +40,9 @@ class homeController extends Controller
     }
     public function pdfStream()
     {
-
+        $terbilang = Terbilang::class;
         $data = PPh23::get();
-        $pdf = Pdf::loadView('pajak', ['data' => $data]);
+        $pdf = Pdf::loadView('pajak', ['data' => $data])->with;
         return $pdf->stream();
     }
 }
