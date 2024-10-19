@@ -40,9 +40,8 @@ class homeController extends Controller
     }
     public function pdfStream()
     {
-        $terbilang = Terbilang::class;
         $data = PPh23::get();
-        $pdf = Pdf::loadView('pajak', ['data' => $data])->with;
+        $pdf = Pdf::loadView('pajak', ['data' => $data]);
         return $pdf->stream();
     }
 }
