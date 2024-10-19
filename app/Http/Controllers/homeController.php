@@ -9,7 +9,7 @@ use App\Models\PPh23;
 use App\Models\Penyedia;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Riskihajar\Terbilang\Facades\Terbilang;
+// use Riskihajar\Terbilang\Facades\Terbilang;
 
 class homeController extends Controller
 {
