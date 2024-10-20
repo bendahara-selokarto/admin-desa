@@ -15,6 +15,7 @@ Route::get('/pph22', [homeController::class, 'pph22']);
 Route::get('/pph23', [homeController::class, 'pph23']);
 Route::get('/pdfStream', [homeController::class, 'pdfStream']);
 Route::get('/code', [QRcodeGenerateController::class, 'qrcode']);
+Route::get('/import', [QRcodeGenerateController::class, 'import']);
 Route::get('/img', function (Request $request) {
 
     // dd($image);

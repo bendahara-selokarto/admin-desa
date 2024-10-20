@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\BNBAImport;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class QRcodeGenerateController extends Controller
 {
+    public function import()
+    {
+
+        $resoult =  Excel::import(new BNBAImport, 'file.xlsx');
+    }
+
+
     public function qrcode()
     {
 
