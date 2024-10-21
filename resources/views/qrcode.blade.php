@@ -12,11 +12,11 @@
 <body>
     <div class="container">
         <div class="row">
-            @foreach ( $simple as $s)            
+            @foreach ( $data as $s)            
             <div class="col-sm">
-                <p class="mb-0">{{  $s[0] }}</p>
-                <p class="mb-0">{{  $s[2] }}</p>
-                <img src="data:image/png;base64, {!! base64_encode( $s[1] ) !!} ">
+                {{-- <p class="mb-0">{{  $s[0] }}</p> --}}
+                {{-- <p class="mb-0">{{  $s[2] }}</p> --}}
+                <img src="data:image/png;base64, {!! base64_encode( $s->kode) !!} ">
             </div>
                 @endforeach
             </div>

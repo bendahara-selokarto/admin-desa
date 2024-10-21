@@ -90,7 +90,7 @@ class QRcodeGenerateController extends Controller
 
         // return view('qrcode', ['simple'  => $qrCodes]);
 
-        $pdf = Pdf::loadView('qrcode', ['simple' => $qrCodes]);
+        $pdf = Pdf::loadView('qrcode', ['data' => $qrCodes]);
         return $pdf->stream();
     }
 }
