@@ -13,7 +13,17 @@ class QRcodeGenerateController extends Controller
     public function import()
     {
 
-        $resoult =  Excel::import(new BNBAImport, 'file.xlsx');
+        $resoult =  Excel::toCollection(new BNBAImport, 'file.xlsx')->first();
+        $hasil = $resoult->mapSpread(function ($q, $r, $s) {
+            $obj = [$q, base64_encode(QrCode::size(100)->generate($r)), $s];
+
+            return $obj;
+        });
+
+
+
+        $pdf = Pdf::loadView('qrcode', ['data' =>  $hasil]);
+        return $pdf->stream();
     }
 
 
@@ -80,16 +90,12 @@ class QRcodeGenerateController extends Controller
         ];
         foreach ($arry as $value) {
             $qrCode = [];
-            $qrCode[0] = $value[0];
-            $qrCode[1] = QrCode::size(100)->generate($value[1]);
-            $qrCode[2] = $value[2];
-            array_push($qrCodes, $qrCode);
+            $qrCode[] = $value[0];
+            $qrCode[] = base64_encode(QrCode::size(100)->generate($value[1]));
+            $qrCode[] = $value[2];
+            $qrCodes[] = $qrCode;
         }
-
-
-
-        // return view('qrcode', ['simple'  => $qrCodes]);
-
+        dd($qrCodes);
         $pdf = Pdf::loadView('qrcode', ['data' => $qrCodes]);
         return $pdf->stream();
     }
