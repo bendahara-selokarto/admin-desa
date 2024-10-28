@@ -2,27 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\BNBAImport;
-use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Imports\KeluargaPenerimaManfaatImport;
 
 class QRcodeGenerateController extends Controller
 {
     public function import()
     {
-        $resoult =  Excel::toCollection(new BNBAImport, 'file.xlsx')->first();
-        if ($resoult->first()->first() != null) {
+        try {
+            $importedData =  Excel::toCollection(new KeluargaPenerimaManfaatImport, 'file.xlsx')->first();
+            if ($importedData->first()->first() != null) {
 
-            $hasil = $resoult->mapSpread(function ($q, $r, $s) {
-                $obj = [$q, base64_encode(QrCode::size(100)->generate($r)), $s];
-                return $obj;
-            });
+                $processedData = $importedData->map(function ($row) {
+                    $qrCodeData = QrCode::size(160)->generate($row[1]);
+                    $qrCode = base64_encode($qrCodeData);
 
-            $pdf = Pdf::loadView('qrcode', ['data' =>  $hasil]);
-            return $pdf->stream();
+                    return  [$row[0], $qrCode, $row[2], 'pretek', 'pecalungan'];
+                });
+
+                $pdf = Pdf::loadView('qrcode', ['data' =>   $processedData]);
+                return $pdf->stream();
+            }
+            return redirect('/')->with('error', 'No data found in the imported file.');
+        } catch (\Throwable $e) {
+            return redirect('/')->with('error', 'An error occurred: ' . $e->getMessage());
         }
-        return redirect('/')->with('status', 'Profile updated!');
     }
 };

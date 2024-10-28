@@ -10,10 +10,25 @@
     <div class="container">
         <div class="row">       
             @foreach ( $data as $v)            
-            <div class="col-sm">             
-                <p>{{ $v[0] }}</p>
-                <img src="data:image/svg;base64, '{{ $v[1] }}' ">
-                <p>{{ $v[2] }}</p>
+            <div class="col-sm"> 
+                <table>
+                    <row>
+                        <col> 
+                        <ul>
+                            <li><p>{{ $v[0] }}</li>
+                                <li>{{ $v[2] }}</li>
+                            <li><p>{{ $v[3] }}</p></li>
+                            <li><p>{{ $v[4] }}</p></li>
+                        </ul>
+                        <col><img src="data:image/svg;base64, '{{ $v[1] }}' ">
+                       
+                        
+                        
+                    </row>
+                </table>            
+               
+                
+                
             </div>
                 @endforeach
             </div>
