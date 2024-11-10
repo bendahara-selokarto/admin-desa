@@ -35,7 +35,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 
 
-        // $section->addImage("https://www.itsolutionstuff.com/frontTheme/images/logo.png");
+        // $section->addImage("favicon.ico");
 
         $section->addText($importedData);
 
@@ -65,7 +65,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
                     $qrCodeData = QrCode::size(160)->generate($row[1]);
                     $qrCode = base64_encode($qrCodeData);
 
-                    return  [$row[0], $qrCode, $row[2], 'pretek', 'pecalungan'];
+                    return  [$row[0], $qrCode, $row[2], 'selokarto', 'pecalungan'];
                 });
 
                 $pdf = Pdf::loadView('qrcode', ['data' =>   $processedData]);

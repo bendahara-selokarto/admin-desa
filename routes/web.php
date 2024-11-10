@@ -32,7 +32,11 @@ Route::get('/img', function (Request $request) {
     }
 });
 Route::get('/msword', function () {
-    for ($i = 0; $i < 10; $i++) {
+
+    $a = 0;
+    while ($a <= 10) {
+
+
 
         $file = public_path('storage/surat_pernyataan.rtf');
 
@@ -52,9 +56,11 @@ Route::get('/msword', function () {
             '[TANGGAL]' => date('d F Y'),
         );
 
-        $nama_file = 'surat-keterangan-kerja' . $i . '.doc';
+        $nama_file = 'surat-keterangan-kerja' . $a . '.doc';
 
-        WordTemplate::export($file, $array, $nama_file);
+        $a++;
+
+
+        return WordTemplate::export($file, $array, $nama_file);
     }
-    return;
 });
